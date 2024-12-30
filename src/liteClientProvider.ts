@@ -81,7 +81,7 @@ export function createLiteClientProvider(
                     code: state.state?.storage.state.state.code?.toBoc(),
                     data: state.state?.storage.state.state.data?.toBoc(),
                 }
-            } else if (state.state?.storage.state.type === 'uninit') {
+            } else if (!state.state || state.state?.storage.state.type === 'uninit') {
                 storage = {
                     type: 'uninit',
                 }
@@ -96,7 +96,7 @@ export function createLiteClientProvider(
             }
 
             return {
-                balance: BigInt(state.state.storage.balance.coins),
+                balance: BigInt(state.balance.coins),
                 last,
                 state: storage,
             }
